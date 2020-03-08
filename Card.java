@@ -17,10 +17,26 @@ public class Card {
         image diamonds = new image[13];
 	
 	//constructor for cards
-	Card(int suit, int values)
-	{
+	Card(int suit, int values) {
 	    this.rank = values;
 	    this.suit = suit;
+		
+		//if statement to determine the suit (1,2,3,4)
+		for( int i = 0; i <= 13; i++ ) {
+   			clubs[i] = getImage( getDocumentBase(), c(i).gif )
+		}
+		
+		for( int i = 0; i <= 13; i++ ) {
+   			hearts[i] = getImage( getDocumentBase(), h(i).gif )
+		}
+		
+		for( int i = 0; i <= 13; i++ ) {
+   			spades[i] = getImage( getDocumentBase(), s(i).gif )
+		}
+		
+		for( int i = 0; i <= 13; i++ ) {
+   			diamonds[i] = getImage( getDocumentBase(), d(i).gif )
+		}
         
 	}
 	
