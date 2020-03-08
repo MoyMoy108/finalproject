@@ -88,7 +88,9 @@ public class Gameplay {
 	        if(checkDealerBust()){
 	            //the users win as long as there was no bust on their end
 	        	if(!checkPlayerBust()) {
-	        		
+	        		//call a method to draw player wins
+	        		//call a method to create a pop-up window
+	        		//update stats(total and card counter)
 	        	}
 	        	
 	        }
