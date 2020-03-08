@@ -1,5 +1,8 @@
 package FinalProject;
 
+import java.applet.*;
+import java.awt.*;
+
 
 public class Card {
 	//private variables
@@ -8,12 +11,17 @@ public class Card {
 	private int value;
 	private String[] ranks = {"Ace","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Jack","Queen","King"};
 	private String[] suits = {"Clubs","Diamonds","Hearts","Spades"};
+	image clubs = new image[13];
+        image hearts = new image[13];
+        image spades = new image[13];
+        image diamonds = new image[13];
 	
 	//constructor for cards
 	Card(int suit, int values)
 	{
 	    this.rank = values;
 	    this.suit = suit;
+        
 	}
 	
 	//gets the rank
