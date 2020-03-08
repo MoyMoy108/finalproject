@@ -3,7 +3,7 @@ package FinalProject;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Deck {
+public class Deck throws IOException {
 
 	private ArrayList<Card> deck;
 	/*
