@@ -23,15 +23,15 @@ public class StartScreen extends JComponent implements ActionListener{
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(0, 0, 1000, 1000);
-		frame.setBackground(Color.GREEN);
-		//frame set resize = false
+		frame.setBackground(Color.GREEN);  //not working!!!
+		frame.setResizable(false);
 		frame.setVisible(true);
 	}
 	
 	
 	public void addStartButton() {
 		JButton start_button = new JButton("Start Game");  
-		start_button.setBounds(100, 100, 100, 100);
+		start_button.setBounds(100, 120, 100, 50);
 		start_button.setBackground(Color.RED);
 		frame.add(start_button);
 
@@ -41,8 +41,12 @@ public class StartScreen extends JComponent implements ActionListener{
 	
 	public void addStartLabel() {
 		JLabel welcome = new JLabel("Welcome to Black Jack");
-		welcome.setBounds(100, 70, 200, 20);
+		JLabel swag = new JLabel ("by Moises and Saigopal");
+		welcome.setBounds(100, 70, 200, 40);
+		welcome.setFont(new Font("Serif", Font.PLAIN, 20));
+		swag.setBounds(100, 100, 200, 20);
 		frame.add(welcome);
+		frame.add(swag);
 	}
 	
 
