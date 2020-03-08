@@ -30,6 +30,7 @@ public class ComponentScreen extends JComponent implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(0, 0, 1000, 1000);
 		frame.setBackground(Color.GREEN);
+		//frame set resize = false
 		frame.setVisible(true);
 	}
 
