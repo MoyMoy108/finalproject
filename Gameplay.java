@@ -11,8 +11,8 @@ public class Gameplay {
 	Card[] player_cards;
 	private int dealerhandvalue = 0;
 	private int playerhandvalue = 0;
-	public int betamount;
-	private int playermoney;
+	public double betamount;
+	private double playermoney;
 	private boolean playerwins;
 	private boolean dealerwins;
 
@@ -58,8 +58,9 @@ public class Gameplay {
 			System.out.println("That's money you don't have");
 		}
 		betamount = currentbet;
+		playermoney -= betamount; 
 	}
-	
+
 	/*
 	 * function that will get the dealer to hit 
 	 * adds card to dealer's hand
@@ -185,7 +186,8 @@ public class Gameplay {
 		return false;
 	}	
 	/*
-	 * Checks the condition of the game and determines who has won
+	 * Checks the condition of the game and determines who has won 
+	 * after both can no longer or one of the two has won
 	 */
 	public void winStatus() 
 	{
@@ -194,18 +196,29 @@ public class Gameplay {
 		{
 			playerwins = true;
 			dealerwins = false;
+			playermoney += (3 * betamount) /2;
 		}
-		//dealer has blackjack and player doesn't
+		//dealer has blackjack and player doesn't player doesn't gain any money 
 		else if(!playerBlackJack() && dealerBlackJack()) 
 		{
 			playerwins = false;
 			dealerwins = true;
+			
 		}
+		else if(playerBlackJack() && dealerBlackJack()) 
+		{
+			playerwins = false;
+			dealerwins = false;
+			playermoney += betamount;
+		}
+		//amount that is won is equivalent to twice the original amount
 		else if(playerhandvalue <=21 && dealerhandvalue < playerhandvalue)
 		{
 			playerwins = true;
 			dealerwins = false;
+			playermoney += 2 * betamount;
 		}
+		//
 		else if(playerhandvalue <=21 && dealerhandvalue < playerhandvalue)
 		{
 			playerwins = true;
@@ -237,7 +250,7 @@ public class Gameplay {
 		//if player already busted then victory goes to the dealer right away
 		else if( checkPlayerBust())
 		{
-			
+
 		}
 
 	}
