@@ -1,17 +1,20 @@
 package FinalProject;
 
+import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Deck throws IOException {
+public class Deck {
 
 	private ArrayList<Card> deck;
+
 	/*
 	 * Constructs a new arrayList deck and 
 	 * use for loop to fill it up
 	 */
 
-	Deck(){
+	Deck() throws IOException{
 		deck = new ArrayList<Card>();
 		for(int i=0; i<4; i++)
 		{
