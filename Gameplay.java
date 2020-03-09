@@ -45,7 +45,14 @@ public class Gameplay {
 		}
 
 	}
-
+	/*
+	 * gets the player's money
+	 */
+	public double getplayermoney() {
+		return playermoney;
+	}
+	
+	
 	/*
 	 * way of taking a bet and finding out if it is more than
 	 * current assets
