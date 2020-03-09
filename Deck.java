@@ -14,13 +14,18 @@ public class Deck {
 	 * use for loop to fill it up
 	 */
 
-	Deck() throws IOException{
+	Deck() {
 		deck = new ArrayList<Card>();
 		for(int i=0; i<4; i++)
 		{
 			for(int j=1; j<=13; j++)
 			{
-				deck.add(new Card(i,j));
+				try {
+					deck.add(new Card(i,j));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
