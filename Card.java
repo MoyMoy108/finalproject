@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+//import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,12 +15,13 @@ public class Card {
 	private int suit;
 	private int rank;
 	private int value;
+	Image img;
 	private String[] ranks = {"Ace","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Jack","Queen","King"};
 	private String[] suits = {"Clubs","Diamonds","Hearts","Spades"};
-	ArrayList<Image> clubs = new ArrayList<Image>();
-	ArrayList<Image> diamonds = new ArrayList<Image>();
-	ArrayList<Image> hearts = new ArrayList<Image>();
-	ArrayList<Image> spades = new ArrayList<Image>();
+	//	ArrayList<Image> clubs = new ArrayList<Image>();
+	//	ArrayList<Image> diamonds = new ArrayList<Image>();
+	//	ArrayList<Image> hearts = new ArrayList<Image>();
+	//	ArrayList<Image> spades = new ArrayList<Image>();
 
 	BufferedImage brd =null;
 
@@ -28,6 +29,8 @@ public class Card {
 	Card(int suit, int values) throws IOException  {
 		this.rank = values;
 		this.suit = suit;
+		this.img =	this.MyImage();
+	
 	}
 
 
@@ -80,48 +83,43 @@ public class Card {
 
 
 
-	public Collection<? extends Image> MyImage(String filename) throws IOException{
-	//Construct the fully qualified path to filename
-	String path = System.getProperty("user.dir");
-	path += File.separator + "Files" + File.separator;
-	path += filename;
+	public Image  MyImage() throws IOException{
+		//Construct the fully qualified path to filename
+		String path = System.getProperty("user.dir");
+		path += File.separator + "Files" + File.separator;
+		String S = "";
+		if(suit==1) 
+		{
+			S ="C" + rank;
+		}
+		else if(suit ==2)
+		{
+			S ="D" +rank;
+		}
+		else if(suit ==3)
+		{
+			S = "H" +rank;
+		}
+		else if(suit ==4)
+		{
+			S = "S" + rank;
+		}
 
-	try {
+		path += S;
+		Image brd = null;
+		try {
 
-		File file = new File(path);	
+			File file = new File(path);	
 
 
-		brd = ImageIO.read(file) ;
-	} catch (FileNotFoundException e) {
-		
-		// TODO Auto-generated catch block
-		System.out.println("File not Found " + path);
+			brd = ImageIO.read(file) ;
+		} catch (FileNotFoundException e) {
+
+			// TODO Auto-generated catch block
+			System.out.println("File not Found " + path);
+		}
+		return brd;
+
 	}
-
-
-	//read lines from the file
-
-
-
-	//if statement to determine the suit (1,2,3,4)
-	for( int i = 0; i < 13; i++ ) {
-		clubs.addAll(MyImage( (i+1) + "C"+".jpg" )) ;
-	}
-
-	for( int i = 0; i < 13; i++ ) {
-		
-		hearts.addAll(MyImage( (i +1)+"H" + ".jpg" )) ;
-	}
-
-	for( int i = 0; i < 13; i++ ) {
-		spades.addAll(MyImage( (i+1)+"S" +  ".jpg" ));
-	}
-
-	for( int i = 0; i < 13; i++ ) {
-		diamonds.addAll(MyImage((i+1) + "D" + ".jpg" ));
-	}
-	return null;
-
-}
 
 }
