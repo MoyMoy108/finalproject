@@ -54,11 +54,19 @@ public class Gameplay {
 		Scanner bet = new Scanner(System.in);
 		int currentbet= bet.nextInt();
 		if( currentbet > playermoney) {
-			//inform user that that doesn't work
+			//inform user that that doesn't work 
+			//pop up possibly
 			System.out.println("That's money you don't have");
 		}
 		betamount = currentbet;
 		playermoney -= betamount; 
+	}
+
+	/*
+	 * check what the amount is for bet
+	 */
+	public double getBet() {
+		return betamount;
 	}
 
 	/*
@@ -107,10 +115,17 @@ public class Gameplay {
 				playerhandvalue += player_cards[i].getValue();
 			}
 		}
-		else 
+		else if(checkPlayerBust())
 		{
 			//find a way to tell user that they can no longer play that hand 
+			System.out.println("You have gone over and can no longer hit");
 		}
+		else if(playerBlackJack())
+		{
+			//find a way to tell user that they can no longer play that hand due to victory
+			System.out.println("You have gotten 21 and can no longer hit");
+		}
+
 
 	}
 
@@ -185,6 +200,7 @@ public class Gameplay {
 		}
 		return false;
 	}	
+
 	/*
 	 * Checks the condition of the game and determines who has won 
 	 * after both can no longer or one of the two has won
@@ -203,8 +219,9 @@ public class Gameplay {
 		{
 			playerwins = false;
 			dealerwins = true;
-			
+
 		}
+		//if both people have blackjacks, these is a draw and the bet gets returned 
 		else if(playerBlackJack() && dealerBlackJack()) 
 		{
 			playerwins = false;
@@ -219,10 +236,10 @@ public class Gameplay {
 			playermoney += 2 * betamount;
 		}
 		//
-		else if(playerhandvalue <=21 && dealerhandvalue < playerhandvalue)
+		else if(playerhandvalue <=21 && dealerhandvalue > playerhandvalue)
 		{
-			playerwins = true;
-			dealerwins = false;
+			playerwins = false;
+			dealerwins = true;
 		}
 	}
 
@@ -239,18 +256,15 @@ public class Gameplay {
 			while(dealerCanHit()) 
 			{
 				dealerHit(deck);
-				if(checkDealerBust())
-				{
-					//the users win as long as there was no bust on their end
 
-
-				}
 			}
+
 		}
 		//if player already busted then victory goes to the dealer right away
 		else if( checkPlayerBust())
 		{
-
+			//dealer wins automatically
+			System.out.println("Dealer wins");
 		}
 
 	}
