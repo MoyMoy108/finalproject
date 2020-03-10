@@ -36,13 +36,13 @@ public class Gameplay {
 		for(int i = 0; i<2; i++)
 		{	
 			Card c = deck.drawCard();
-			//System.out.println(c);
+			System.out.println("Dealer " + c);
 			dealer_hand.add(c);
 		}
 		//gives the player one card to start with
 		Card p = deck.drawCard();
 		finalgame.setPanel_6(p);
-		System.out.println(p);
+		System.out.println("Player " + p);
 		player_hand.add(p);
 		//converts the arraylists into arrays
 		dealer_cards =  dealer_hand.toArray(new Card[0]);
@@ -93,7 +93,7 @@ public class Gameplay {
 			String set = "That's money you don't have";
 			finalgame.setS(set);
 			finalgame.addMessage();
-			
+
 		}
 		betamount = currentbet;
 		playermoney -= betamount; 
@@ -115,12 +115,14 @@ public class Gameplay {
 	{
 		dealerhandvalue = 0;
 		Card d = deck.drawCard();
+		System.out.println("dealer gets: " + d);
 		dealer_hand.add(d);
 		dealer_cards = dealer_hand.toArray(new Card[0]);
 		for(int i = 0; i< dealer_cards.length; i++)
 		{
 			dealerhandvalue += dealer_cards[i].getValue();
 		}
+		this.checkDealerBust();
 	}
 
 	/*
@@ -147,7 +149,7 @@ public class Gameplay {
 		{
 			playerhandvalue = 0;
 			Card c = deck.drawCard();
-			System.out.println(c);
+			System.out.println("Player Hit: " + c);
 			player_hand.add(c);
 			player_cards = player_hand.toArray(new Card[0]);
 			for(int i = 0; i< player_cards.length; i++)
@@ -255,7 +257,7 @@ public class Gameplay {
 		//player has blackjack and dealer doesn't but doesn't bust
 		if(playerBlackJack() &&  dealerhandvalue < 21) 
 		{
-			winner = "player wins";
+			winner = "Player wins";
 			String set = winner;
 			finalgame.setS(set);
 			finalgame.addMessage();
@@ -273,7 +275,7 @@ public class Gameplay {
 		//dealer has blackjack and player doesn't bust but doesn't have blackjack player doesn't gain any money 
 		else if(playerhandvalue < 21 && dealerBlackJack()) 
 		{
-			winner = "dealer wins";
+			winner = "Dealer wins";
 			String set = winner;
 			finalgame.setS(set);
 			finalgame.addMessage();
@@ -282,22 +284,45 @@ public class Gameplay {
 		//amount that is won is equivalent to twice the original amount
 		else if(playerhandvalue <=21 && dealerhandvalue < playerhandvalue)
 		{
-			winner = "player wins";
+			winner = "Player wins";
 			String set = winner;
 			finalgame.setS(set);
 			finalgame.addMessage();
 			playermoney += 2 * betamount;
 		} 
-		
+
 		//dealer's hand is closer to 21 than the player without going over
 		else if(playerhandvalue <21 && dealerhandvalue <=21 && dealerhandvalue > playerhandvalue)
 		{
-			winner = "dealer wins";
+			winner = "Dealer wins";
 			String set = winner;
 			finalgame.setS(set);
 			finalgame.addMessage();
 		}
-		
+		//if player doesn't bust and dealer busts
+		else if(playerhandvalue <=21 && checkDealerBust())
+		{
+			winner = "Player wins";
+			String set = winner;
+			finalgame.setS(set);
+			finalgame.addMessage();
+		}
+		//if player gets blackJack and dealer busts
+		else if(playerBlackJack() && checkDealerBust())
+		{
+			winner = "Dealer Busts, and Player wins";
+			String set = winner;
+			finalgame.setS(set);
+			finalgame.addMessage();
+		}
+		//if player gets blackJack and dealer busts
+		else if(playerBlackJack() && checkDealerBust())
+		{
+			winner = "Dealer Busts, and Player wins";
+			String set = winner;
+			finalgame.setS(set);
+			finalgame.addMessage();
+		}
 
 	}
 
@@ -323,10 +348,10 @@ public class Gameplay {
 		else if( checkPlayerBust()==true)
 		{
 			//dealer wins automatically
-//			System.out.println("Dealer wins");
-//			String set = "Dealer Wins";
-//			finalgame.setS(set);
-//			finalgame.addMessage();
+			//			System.out.println("Dealer wins");
+			//			String set = "Dealer Wins";
+			//			finalgame.setS(set);
+			//			finalgame.addMessage();
 		}
 
 	}
