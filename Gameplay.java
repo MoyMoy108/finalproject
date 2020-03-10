@@ -74,6 +74,9 @@ public class Gameplay {
 			//inform user that that doesn't work 
 			//pop up possibly
 			System.out.println("That's money you don't have");
+			String set = "That's money you don't have";
+			FinalGame.s = set;
+			
 		}
 		betamount = currentbet;
 		playermoney -= betamount; 
@@ -137,11 +140,15 @@ public class Gameplay {
 		{
 			//find a way to tell user that they can no longer play that hand 
 			System.out.println("You have gone over and can no longer hit");
+			String set = "You have gone over and can no longer hit";
+			FinalGame.s = set;
 		}
 		else if(playerBlackJack())
 		{
 			//find a way to tell user that they can no longer play that hand due to victory
 			System.out.println("You have gotten 21 and can no longer hit");
+			String set = "You have gotten 21 and can no longer hit";
+			FinalGame.s = set;
 		}
 
 
@@ -283,6 +290,8 @@ public class Gameplay {
 		{
 			//dealer wins automatically
 			System.out.println("Dealer wins");
+			String set = "Dealer Wins";
+			FinalGame.s = set;
 		}
 
 	}
