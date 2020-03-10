@@ -76,7 +76,7 @@ public class Card {
 
 	public String toString()
 	{
-		return ranks[rank]+" of "+suits[suit];
+		return ranks[rank-1]+" of "+suits[suit];
 	}
 
 	//sets the value of a card
