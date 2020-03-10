@@ -18,6 +18,7 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.print.PrinterException;
+import java.awt.Font;
 
 public class FinalGame extends JFrame {
 
@@ -32,10 +33,26 @@ public class FinalGame extends JFrame {
 	JTextField MessageBox = new JTextField();
 	JTextField current_bet;
 	public String s = " ";
-	JButton btnNewButton;
-	JButton btnStay;
+	JButton HitButton;
+	JButton StayButton;
+	
+	public int counter = 0;
+
 	//img panels
-	public ImagePanel panel_6 = new ImagePanel();
+	public ImagePanel panel1 = new ImagePanel();
+	public ImagePanel panel2 = new ImagePanel();
+	public ImagePanel panel3 = new ImagePanel();
+	public ImagePanel panel4 = new ImagePanel();
+	public ImagePanel panel5 = new ImagePanel();
+	public ImagePanel panel6 = new ImagePanel();
+	public ImagePanel panel7 = new ImagePanel();
+	public ImagePanel panel8 = new ImagePanel();
+	public ImagePanel panel9 = new ImagePanel();
+	public ImagePanel panel10 = new ImagePanel();
+	public ImagePanel panel11 = new ImagePanel();
+	public ImagePanel panel12 = new ImagePanel();
+	public ImagePanel panel13 = new ImagePanel();
+	public ImagePanel panel14 = new ImagePanel();
 
 
 	/**
@@ -59,13 +76,13 @@ public class FinalGame extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the frame and add visual elements.
 	 */
 	public FinalGame() {
-		
+
 		setTitle("Black Jack");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 525, 347);
+		setBounds(100, 100, 691, 545);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 102, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,156 +95,160 @@ public class FinalGame extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Dealer");
-		lblNewLabel.setBounds(222, 11, 46, 14);
+		lblNewLabel.setBackground(Color.LIGHT_GRAY);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setBounds(279, 11, 72, 20);
 		contentPane.add(lblNewLabel);
 
 		JLabel lblPlayer = new JLabel("Player");
-		lblPlayer.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPlayer.setBounds(222, 247, 46, 14);
+		lblPlayer.setBackground(Color.LIGHT_GRAY);
+		lblPlayer.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPlayer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPlayer.setBounds(279, 422, 72, 20);
 		contentPane.add(lblPlayer);
 
-		JButton btnNewButton = new JButton("HIT");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				gameplay.playerHit(deck);
-				if (gameplay.playerCanHit()==false) {
-					gameplay.playerHit(deck);
-					btnNewButton.setEnabled(false);
-				}
-			}
-		});
-
-		btnNewButton.setBounds(139, 219, 89, 23);
-		contentPane.add(btnNewButton);
-
-		JButton btnStay = new JButton("STAY");
-		btnStay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				playing=1;
-				MessageBox.setText("You have decided to Stay");
-				btnNewButton.setEnabled(false);
-				btnStay.setEnabled(false);
-				gameplay.dealerTurn(deck);
-				gameplay.winStatus();
-			}
-		});
-		btnStay.setBounds(238, 219, 89, 23);
-		contentPane.add(btnStay);
-
 		JLabel lblNewLabel_1 = new JLabel("Total Assets");
-		lblNewLabel_1.setBounds(419, 247, 80, 14);
+		lblNewLabel_1.setBounds(585, 422, 80, 14);
 		contentPane.add(lblNewLabel_1);
 
 		textField = new JTextField();
-		textField.setBounds(413, 272, 86, 20);
+		textField.setBounds(579, 447, 86, 20);
 		contentPane.add(textField);
 		textField.setText("hello");
 		textField.setColumns(10);
 
-
-		panel_6.setBackground(new Color(255, 102, 51));
-		panel_6.setBounds(61, 35, 46, 69);
-		contentPane.add(panel_6);
-
-		ImagePanel panel_6_1 = new ImagePanel();
-		panel_6_1.setBackground(new Color(0, 102, 51));
-		panel_6_1.setBounds(117, 35, 46, 69);
-		contentPane.add(panel_6_1);
-
-		ImagePanel panel_6_2 = new ImagePanel();
-		panel_6_2.setBackground(new Color(0, 102, 51));
-		panel_6_2.setBounds(173, 35, 46, 69);
-		contentPane.add(panel_6_2);
-
-		ImagePanel panel_6_3 = new ImagePanel();
-		panel_6_3.setBackground(new Color(0, 102, 51));
-		panel_6_3.setBounds(232, 36, 46, 69);
-		contentPane.add(panel_6_3);
-
-		ImagePanel panel_6_4 = new ImagePanel();
-		panel_6_4.setBackground(new Color(0, 102, 51));
-		panel_6_4.setBounds(288, 35, 46, 69);
-		contentPane.add(panel_6_4);
-
-		ImagePanel panel_6_5 = new ImagePanel();
-		panel_6_5.setBackground(new Color(0, 102, 51));
-		panel_6_5.setBounds(344, 35, 46, 69);
-		contentPane.add(panel_6_5);
-
-		ImagePanel panel_6_6 = new ImagePanel();
-		panel_6_6.setBackground(new Color(0, 102, 51));
-		panel_6_6.setBounds(400, 35, 46, 69);
-		contentPane.add(panel_6_6);
-
-		ImagePanel panel_6_7 = new ImagePanel();
-		panel_6_7.setBackground(new Color(0, 102, 51));
-		panel_6_7.setBounds(61, 151, 46, 69);
-		contentPane.add(panel_6_7);
-
-		ImagePanel panel_6_8 = new ImagePanel();
-		panel_6_8.setBackground(new Color(0, 102, 51));
-		panel_6_8.setBounds(117, 151, 46, 69);
-		contentPane.add(panel_6_8);
-
-		ImagePanel panel_6_9 = new ImagePanel();
-		panel_6_9.setBackground(new Color(0, 102, 51));
-		panel_6_9.setBounds(173, 151, 46, 69);
-		contentPane.add(panel_6_9);
-
-		ImagePanel panel_6_10 = new ImagePanel();
-		panel_6_10.setBackground(new Color(0, 102, 51));
-		panel_6_10.setBounds(232, 151, 46, 69);
-		contentPane.add(panel_6_10);
-
-		ImagePanel panel_6_11 = new ImagePanel();
-		panel_6_11.setBackground(new Color(0, 102, 51));
-		panel_6_11.setBounds(288, 151, 46, 69);
-		contentPane.add(panel_6_11);
-
-		ImagePanel panel_6_12 = new ImagePanel();
-		panel_6_12.setBackground(new Color(0, 102, 51));
-		panel_6_12.setBounds(344, 151, 46, 69);
-		contentPane.add(panel_6_12);
-
-		ImagePanel panel_6_13 = new ImagePanel();
-		panel_6_13.setBackground(new Color(0, 102, 51));
-		panel_6_13.setBounds(400, 151, 46, 69);
-		contentPane.add(panel_6_13);
-
-
 		MessageBox.setText("Message Box");
 		MessageBox.setHorizontalAlignment(SwingConstants.CENTER);
-		MessageBox.setBounds(117, 272, 273, 20);
+		MessageBox.setBounds(109, 447, 460, 20);
 		contentPane.add(MessageBox);
 		MessageBox.setColumns(10);
 
-
 		JLabel current_bet_label = new JLabel("Current Bet");
-		current_bet_label.setBounds(10, 247, 89, 14);
+		current_bet_label.setBounds(10, 422, 89, 14);
 		contentPane.add(current_bet_label);
 
 		current_bet = new JTextField();
-		current_bet.setBounds(10, 272, 89, 20);
+		current_bet.setBounds(10, 447, 89, 20);
 		contentPane.add(current_bet);
-		current_bet.setColumns(10);
-		
+		current_bet.setColumns(10);	
+
+
+		/*
+		 * Action buttons
+		 */
+		JButton HitButton = new JButton("HIT");
+		HitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gameplay.playerHit(deck);
+				
+				if (gameplay.playerCanHit()==false) {
+					gameplay.playerHit(deck);
+					HitButton.setEnabled(false);
+				}
+			}
+		});
+
+		HitButton.setBounds(208, 388, 105, 33);
+		contentPane.add(HitButton);
+
+		JButton StayButton = new JButton("STAY");
+		StayButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				playing=1;
+				MessageBox.setText("You have decided to Stay");
+				HitButton.setEnabled(false);
+				StayButton.setEnabled(false);
+				gameplay.dealerTurn(deck);
+				gameplay.winStatus();
+			}
+		});
+		StayButton.setBounds(323, 388, 109, 33);
+		contentPane.add(StayButton);
+
+
+
+		/*
+		 * Making invisible panels to draw the cards in
+		 */
+		panel1.setBackground(new Color(0, 102, 51));
+		panel1.setBounds(36, 36, 71, 105);
+		contentPane.add(panel1);
+
+		panel2.setBackground(new Color(0, 102, 51));
+		panel2.setBounds(117, 36, 71, 105);
+		contentPane.add(panel2);
+
+		panel3.setBackground(new Color(0, 102, 51));
+		panel3.setBounds(198, 36, 71, 105);
+		contentPane.add(panel3);
+
+		panel4.setBackground(new Color(0, 102, 51));
+		panel4.setBounds(279, 34, 71, 107);
+		contentPane.add(panel4);
+
+		panel5.setBackground(new Color(0, 102, 51));
+		panel5.setBounds(364, 35, 71, 105);
+		contentPane.add(panel5);
+
+		panel6.setBackground(new Color(0, 102, 51));
+		panel6.setBounds(445, 35, 71, 105);
+		contentPane.add(panel6);
+
+		panel7.setBackground(new Color(0, 102, 51));
+		panel7.setBounds(532, 36, 71, 105);
+		contentPane.add(panel7);
+
+		panel8.setBackground(new Color(0, 102, 51));
+		panel8.setBounds(36, 272, 71, 105);
+		contentPane.add(panel8);
+
+		panel9.setBackground(new Color(0, 102, 51));
+		panel9.setBounds(117, 272, 70, 105);
+		contentPane.add(panel9);
+
+		panel10.setBackground(new Color(0, 102, 51));
+		panel10.setBounds(198, 272, 72, 105);
+		contentPane.add(panel10);
+
+		panel11.setBackground(new Color(0, 102, 51));
+		panel11.setBounds(280, 272, 71, 105);
+		contentPane.add(panel11);
+
+		panel12.setBackground(new Color(0, 102, 51));
+		panel12.setBounds(365, 272, 71, 105);
+		contentPane.add(panel12);
+
+		panel13.setBackground(new Color(0, 102, 51));
+		panel13.setBounds(446, 272, 71, 105);
+		contentPane.add(panel13);
+
+		panel14.setBackground(new Color(0, 102, 51));
+		panel14.setBounds(532, 272, 71, 105);
+		contentPane.add(panel14);
+
+
 		gameplay = new Gameplay(deck, this);
 	}
 
+
+	/*
+	 * the instructions on which methods to call for dealer and player to play and check for winner
+	 */
 
 	public void playgame() {
 		while(playing==0) {
 			//System.out.println(gameplay.getPlayerHand());
 			while(gameplay.playerCanHit() == true) 
 			{
-				btnNewButton.setEnabled(true);
-				btnStay.setEnabled(true);
+				HitButton.setEnabled(true);
+				StayButton.setEnabled(true);
 				gameplay.playerrun(deck);
 				//gameplay.playerHit(deck);
-
 			}
-
 		}
+
+
 		while(playing==1) {
 			while(gameplay.dealerCanHit()==true) {
 				gameplay.dealerTurn(deck);
@@ -235,82 +256,92 @@ public class FinalGame extends JFrame {
 					playing =2;
 					gameplay.winStatus();
 				}
-
-
 			}
 		}
+
+
 		while (playing ==2) {
 			gameplay.winStatus();
 		}
 	}
 
+
 	public void addMessage(){
-
 		MessageBox.setText(s);
-
 	}
+
 
 	public void setS(String news) {
 		s = news;
 	}
 
 
-	//set image panels
-	public void setPanel_6(Card c) {
-//		
 
-		
-		//System.out.println(c.toString());
+	//set image panels
+	public void setPanel1(Card c) {
 		if (c != null) {
-			this.panel_6.setCard(c);
+			this.panel1.setCard(c);
 			repaint();
 		}
 	}
 
-	//	public void setPanel_6_1() {
-	//		panel_6_1.
-	//	}
-	//	
-	//	public void setPanel_6_2() {
-	//		panel_6_2.
-	//	}
-	//	
-	//	public void setPanel_6_3() {
-	//		panel_6_3.
-	//	}
-	//	
-	//	public void setPanel_6_4() {
-	//		panel_6_4.
-	//	}
-	//	
-	//	public void setPanel_6_5() {
-	//		panel_6_5.
-	//	}
-	//	
-	//	public void setPanel_6_6() {
-	//		panel_6_6.
-	//	}
-	//	
-	//	public void setPanel_6_7() {
-	//		panel_6_7.
-	//	}
-	//	public void setPanel_6_8() {
-	//	panel_6_8.
-	//}
-	//public void setPanel_6_9() {
-	//	panel_6_9.
-	//}
-	//public void setPanel_6_10() {
-	//	panel_6_10.
-	//}
-	//public void setPanel_6_11() {
-	//	panel_6_11.
-	//}
-	//public void setPanel_6_12() {
-	//	panel_6_12.
-	//}
-	//public void setPanel_6_13() {
-	//	panel_6_13.
-	//}
+	public void setPanel2(Card c) {
+		this.panel2.setCard(c);
+		repaint();
+	}
+
+	public void setPanel3 (Card c) {
+		panel3.setCard(c);
+		repaint();
+	}
+
+	public void setPanel4 (Card c) {
+		panel4.setCard(c);
+		repaint();
+	}
+
+	public void setPanel5(Card c) {
+		panel5.setCard(c);
+		repaint();
+	}
+
+	public void setPanel6(Card c) {
+		panel6.setCard(c);
+	}
+
+	public void setPanel7(Card c) {
+		panel7.setCard(c);
+		repaint();
+	}
+
+	public void setPanel8(Card c) {
+		panel8.setCard(c);
+		repaint();
+	}
+	
+	public void setPanel9(Card c) {
+		panel9.setCard(c);
+		repaint();
+	}
+	public void setPanel10(Card c) {
+		panel10.setCard(c);
+		repaint();
+	}
+	public void setPanel11(Card c) {
+		panel11.setCard(c);
+		repaint();
+	}
+	public void setPanel12(Card c) {
+		panel12.setCard(c);
+		repaint();
+	}
+	public void setPanel13(Card c) {
+		panel13.setCard(c);
+		repaint();
+	}
+	public void setPanel14(Card c) {
+		panel14.setCard(c);
+		repaint();
+	}
 
 }
