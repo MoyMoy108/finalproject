@@ -53,7 +53,7 @@ public class Card {
 	//gets the values based on the rank of the card
 	public int getValue()
 	{	
-		//based on blackjack facecards are worth 10
+		//based on blackjack face cards are worth 10
 		if(rank>10)
 		{
 			value=10;
@@ -86,7 +86,9 @@ public class Card {
 	}
 
 
-
+/*
+ * Shows the image location
+ */
 	public Image MyImage() throws IOException{
 		//Construct the fully qualified path to filename
 		String path = System.getProperty("user.dir");
@@ -127,3 +129,7 @@ public class Card {
 	}
 
 }
+
+
+
+
