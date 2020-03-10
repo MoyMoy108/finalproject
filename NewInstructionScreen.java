@@ -20,6 +20,7 @@ public class NewInstructionScreen extends JFrame implements ActionListener {
 
 	static NewInstructionScreen frame;
 	private JPanel contentPane;
+	FinalGame finalgame = new FinalGame();
 
 	/**
 	 * Launch the application.
@@ -73,6 +74,12 @@ public class NewInstructionScreen extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		frame.setVisible(false);
-		FinalGame.main(null);
+		try {
+			FinalGame.main(null);
+			//finalgame.playgame();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 }
