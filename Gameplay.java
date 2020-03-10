@@ -36,13 +36,14 @@ public class Gameplay {
 		for(int i = 0; i<2; i++)
 		{	
 			Card c = deck.drawCard();
-			System.out.println(c);
+			//System.out.println(c);
 			dealer_hand.add(c);
 		}
 		//gives the player one card to start with
-//		Card c = deck.drawCard();
-//		//finalgame.setPanel_6(c);
-//		player_hand.add(c);
+		Card p = deck.drawCard();
+		finalgame.setPanel_6(p);
+		System.out.println(p);
+		player_hand.add(p);
 		//converts the arraylists into arrays
 		dealer_cards =  dealer_hand.toArray(new Card[0]);
 		player_cards = player_hand.toArray(new Card[0]);
@@ -75,7 +76,9 @@ public class Gameplay {
 		return playermoney;
 	}
 
-
+	public ArrayList<Card> getPlayerHand(){
+		return player_hand;
+	}
 	/*
 	 * way of taking a bet and finding out if it is more than
 	 * current assets
@@ -157,7 +160,7 @@ public class Gameplay {
 		{
 			//find a way to tell user that they can no longer play that hand 
 			System.out.println("You have gone over and can no longer hit");
-			String set = "You have gone over and can no longer hit";
+			String set = "You have gone over -Dealer wins";
 			finalgame.setS(set);
 			finalgame.addMessage();
 		}
@@ -320,10 +323,10 @@ public class Gameplay {
 		else if( checkPlayerBust()==true)
 		{
 			//dealer wins automatically
-			System.out.println("Dealer wins");
-			String set = "Dealer Wins";
-			finalgame.setS(set);
-			finalgame.addMessage();
+//			System.out.println("Dealer wins");
+//			String set = "Dealer Wins";
+//			finalgame.setS(set);
+//			finalgame.addMessage();
 		}
 
 	}
