@@ -17,9 +17,11 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.print.PrinterException;
 
 public class FinalGame extends JFrame {
 
+	
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField txtEnterBetAmount;
@@ -27,19 +29,26 @@ public class FinalGame extends JFrame {
 	Deck deck = new Deck();
 	Gameplay gameplay = new Gameplay(deck);
 	static FinalGame frame;
+	JTextField MessageBox = null;
+	JTextField current_bet;
+	public static String s = "";
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					frame = new FinalGame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		
+					try {
+						FinalGame frame = new FinalGame();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
 			}
 		});
 	}
@@ -56,16 +65,9 @@ public class FinalGame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JPopupMenu popupMenu = new JPopupMenu();
-		popupMenu.setBounds(0, 0, 212, 98);
-		addPopup(contentPane, popupMenu);
-		
-		JButton btnNewButton_1 = new JButton("Place bet");
-		popupMenu.add(btnNewButton_1);
 		
 		txtEnterBetAmount = new JTextField();
 		txtEnterBetAmount.setText("Enter Bet amount");
-		popupMenu.add(txtEnterBetAmount);
 		txtEnterBetAmount.setColumns(10);
 		contentPane.setLayout(null);
 		
@@ -170,22 +172,30 @@ public class FinalGame extends JFrame {
 		panel_6_13.setBackground(new Color(0, 102, 51));
 		panel_6_13.setBounds(400, 151, 46, 69);
 		contentPane.add(panel_6_13);
+		
+		
+			MessageBox.setText("Message Box");
+			MessageBox.setHorizontalAlignment(SwingConstants.CENTER);
+			MessageBox.setBounds(117, 272, 273, 20);
+			contentPane.add(MessageBox);
+			MessageBox.setColumns(10);
+	
+		
+		JLabel current_bet_label = new JLabel("Current Bet");
+		current_bet_label.setBounds(10, 247, 89, 14);
+		contentPane.add(current_bet_label);
+		
+		current_bet = new JTextField();
+		current_bet.setBounds(10, 272, 89, 20);
+		contentPane.add(current_bet);
+		current_bet.setColumns(10);
 	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
+	
+	
+	public void addMessage(){
+		
+		MessageBox.setText(s);
+		
 	}
+	
 }
