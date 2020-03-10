@@ -48,21 +48,21 @@ static NewStartScreen frame;
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Start");
-		btnNewButton.setBackground(Color.GRAY);
-		btnNewButton.setBounds(165, 106, 89, 23);
-		btnNewButton.addActionListener(this);
-		contentPane.add(btnNewButton);
+		JButton StartButton = new JButton("Start");
+		StartButton.setBackground(Color.GRAY);
+		StartButton.setBounds(165, 106, 89, 23);
+		StartButton.addActionListener(this);
+		contentPane.add(StartButton);
 		
-		JLabel lblNewLabel = new JLabel("Welcome to Black Jack!");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(136, 49, 147, 46);
-		contentPane.add(lblNewLabel);
+		JLabel welcomeLabel = new JLabel("Welcome to Black Jack!");
+		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeLabel.setBounds(136, 49, 147, 46);
+		contentPane.add(welcomeLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("By Moises and Saigopal");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(136, 185, 147, 14);
-		contentPane.add(lblNewLabel_1);
+		JLabel braggingLabel = new JLabel("By Moises and Saigopal");
+		braggingLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		braggingLabel.setBounds(136, 185, 147, 14);
+		contentPane.add(braggingLabel);
 	}
 	
 	@Override
