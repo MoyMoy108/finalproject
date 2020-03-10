@@ -87,7 +87,7 @@ public class Card {
 
 
 
-	public Image  MyImage() throws IOException{
+	public Image MyImage() throws IOException{
 		//Construct the fully qualified path to filename
 		String path = System.getProperty("user.dir");
 		path += File.separator + "Files" + File.separator;
@@ -112,7 +112,7 @@ public class Card {
 		path += S +".png";
 		Image brd = null;
 		try {
-			System.out.println(path);
+			//System.out.println(path);
 			File file = new File(path);	
 
 
