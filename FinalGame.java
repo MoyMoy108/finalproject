@@ -62,7 +62,7 @@ public class FinalGame extends JFrame {
 	 * Create the frame.
 	 */
 	public FinalGame() {
-		gameplay = new Gameplay(deck, this);
+		
 		setTitle("Black Jack");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 525, 347);
@@ -107,6 +107,7 @@ public class FinalGame extends JFrame {
 				MessageBox.setText("You have decided to Stay");
 				btnNewButton.setEnabled(false);
 				btnStay.setEnabled(false);
+				gameplay.dealerTurn(deck);
 			}
 		});
 		btnStay.setBounds(238, 219, 89, 23);
@@ -208,11 +209,14 @@ public class FinalGame extends JFrame {
 		current_bet.setBounds(10, 272, 89, 20);
 		contentPane.add(current_bet);
 		current_bet.setColumns(10);
+		
+		gameplay = new Gameplay(deck, this);
 	}
 
 
 	public void playgame() {
 		while(playing==0) {
+			//System.out.println(gameplay.getPlayerHand());
 			while(gameplay.playerCanHit() == true) 
 			{
 				btnNewButton.setEnabled(true);
