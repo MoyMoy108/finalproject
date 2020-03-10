@@ -11,17 +11,29 @@ public class ImagePanel extends JPanel{
 	Card card;
 
 
-
 	public ImagePanel() {
 		
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (card !=null) {
-			g.drawImage(card.getImage(), 0, 0, this); // see javadoc for more info on the parameters            
+			try {
+				g.drawImage(card.MyImage(), 0, 0, this);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} // see javadoc for more info on the parameters            
 		}
+	}
+	
+	public void setCard(Card c) {
+		card = c;
+	}
+	
+	public String toString() {
+		return "I AM A PANEL";
 	}
 
 }
