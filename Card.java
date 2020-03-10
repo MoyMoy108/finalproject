@@ -26,14 +26,18 @@ public class Card {
 	BufferedImage brd =null;
 
 	//constructor for cards
-	Card(int suit, int values) throws IOException  {
-		this.rank = values;
+	Card(int suit, int rank) throws IOException  {
+		this.rank = rank;
 		this.suit = suit;
 		this.img =	this.MyImage();
 	
 	}
 
-
+	//gets image
+	public Image getImage()
+	{
+		return img;
+	}
 	//gets the rank
 	public int getRank()
 	{
@@ -90,25 +94,25 @@ public class Card {
 		String S = "";
 		if(suit==1) 
 		{
-			S ="C" + rank;
+			S ="C" + rank ;
 		}
 		else if(suit ==2)
 		{
-			S ="D" +rank;
+			S ="D" + rank;
 		}
 		else if(suit ==3)
 		{
-			S = "H" +rank;
+			S = "H" + rank;
 		}
-		else if(suit ==4)
+		else 
 		{
 			S = "S" + rank;
 		}
 
-		path += S;
+		path += S +".png";
 		Image brd = null;
 		try {
-
+			System.out.println(path);
 			File file = new File(path);	
 
 
