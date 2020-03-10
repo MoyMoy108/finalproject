@@ -51,24 +51,28 @@ public class NewInstructionScreen extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("INSTRUCTIONS");
-		lblNewLabel.setBackground(new Color(0, 102, 51));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(154, 11, 119, 44);
-		contentPane.add(lblNewLabel);
+		JLabel instructionsLabel = new JLabel("INSTRUCTIONS");
+		instructionsLabel.setBackground(new Color(0, 102, 51));
+		instructionsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		instructionsLabel.setBounds(154, 11, 119, 44);
+		contentPane.add(instructionsLabel);
 		
-		JButton btnNewButton = new JButton("Let's Play!");
-		btnNewButton.setBackground(Color.RED);
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.setBounds(154, 202, 119, 34);
-		btnNewButton.addActionListener(this);
-		contentPane.add(btnNewButton);
+		JButton PlayButton = new JButton("Let's Play!");
+		PlayButton.setBackground(Color.RED);
+		PlayButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		PlayButton.setBounds(154, 202, 119, 34);
+		PlayButton.addActionListener(this);
+		contentPane.add(PlayButton);
 		
 		JTextArea txtrWelcomeToBlack = new JTextArea();
 		txtrWelcomeToBlack.setText("Welcome to Black Jack!\r\n\r\nHere are the rules!!!");
 		txtrWelcomeToBlack.setBounds(38, 48, 361, 148);
 		contentPane.add(txtrWelcomeToBlack);
 	}
+	
+	/*
+	 * Action event for PlayButton to implement
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
