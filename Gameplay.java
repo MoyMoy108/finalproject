@@ -31,8 +31,8 @@ public class Gameplay {
 		//gives the player one card to start with
 		player_hand.add(deck.drawCard());
 		//converts the arraylists into arrays
-		dealer_cards = (Card[]) dealer_hand.toArray();
-		player_cards = (Card[]) player_hand.toArray();
+		dealer_cards =  dealer_hand.toArray(new Card[0]);
+		player_cards = player_hand.toArray(new Card[0]);
 		//gets the current value of the dealer's hand upon starting
 		for(int i = 0; i<dealer_cards.length; i++)
 		{
@@ -45,14 +45,24 @@ public class Gameplay {
 		}
 
 	}
+
+	/*
+	 * Player plays
+	 */
+	public void playerrun(Deck deck) {
+		while(playerCanHit()) {
+			playerHit(deck);
+		}
+	}
+
 	/*
 	 * gets the player's money
 	 */
 	public double getplayermoney() {
 		return playermoney;
 	}
-	
-	
+
+
 	/*
 	 * way of taking a bet and finding out if it is more than
 	 * current assets
@@ -85,7 +95,7 @@ public class Gameplay {
 	{
 		dealerhandvalue = 0;
 		dealer_hand.add(deck.drawCard());
-		dealer_cards = (Card[]) dealer_hand.toArray();
+		dealer_cards = dealer_hand.toArray(new Card[0]);
 		for(int i = 0; i< dealer_cards.length; i++)
 		{
 			dealerhandvalue += dealer_cards[i].getValue();
@@ -116,11 +126,12 @@ public class Gameplay {
 		{
 			playerhandvalue = 0;
 			player_hand.add(deck.drawCard());
-			player_cards = (Card[]) player_hand.toArray();
+			player_cards = player_hand.toArray(new Card[0]);
 			for(int i = 0; i< player_cards.length; i++)
 			{
 				playerhandvalue += player_cards[i].getValue();
 			}
+
 		}
 		else if(checkPlayerBust())
 		{
