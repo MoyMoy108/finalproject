@@ -81,7 +81,7 @@ public class FinalGame extends JFrame {
 		JButton btnNewButton = new JButton("HIT");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				gameplay.playerHit(deck);
 			}
 		});
 		btnNewButton.setBounds(139, 219, 89, 23);
@@ -101,72 +101,72 @@ public class FinalGame extends JFrame {
 		textField.setText("hello");
 		textField.setColumns(10);
 		
-		JPanel panel_6 = new JPanel();
+		ImagePanel panel_6 = new ImagePanel();
 		panel_6.setBackground(new Color(0, 102, 51));
 		panel_6.setBounds(61, 35, 46, 69);
 		contentPane.add(panel_6);
 		
-		JPanel panel_6_1 = new JPanel();
+		ImagePanel panel_6_1 = new ImagePanel();
 		panel_6_1.setBackground(new Color(0, 102, 51));
 		panel_6_1.setBounds(117, 35, 46, 69);
 		contentPane.add(panel_6_1);
 		
-		JPanel panel_6_2 = new JPanel();
+		ImagePanel panel_6_2 = new ImagePanel();
 		panel_6_2.setBackground(new Color(0, 102, 51));
 		panel_6_2.setBounds(173, 35, 46, 69);
 		contentPane.add(panel_6_2);
 		
-		JPanel panel_6_3 = new JPanel();
+		ImagePanel panel_6_3 = new ImagePanel();
 		panel_6_3.setBackground(new Color(0, 102, 51));
 		panel_6_3.setBounds(232, 36, 46, 69);
 		contentPane.add(panel_6_3);
 		
-		JPanel panel_6_4 = new JPanel();
+		ImagePanel panel_6_4 = new ImagePanel();
 		panel_6_4.setBackground(new Color(0, 102, 51));
 		panel_6_4.setBounds(288, 35, 46, 69);
 		contentPane.add(panel_6_4);
 		
-		JPanel panel_6_5 = new JPanel();
+		ImagePanel panel_6_5 = new ImagePanel();
 		panel_6_5.setBackground(new Color(0, 102, 51));
 		panel_6_5.setBounds(344, 35, 46, 69);
 		contentPane.add(panel_6_5);
 		
-		JPanel panel_6_6 = new JPanel();
+		ImagePanel panel_6_6 = new ImagePanel();
 		panel_6_6.setBackground(new Color(0, 102, 51));
 		panel_6_6.setBounds(400, 35, 46, 69);
 		contentPane.add(panel_6_6);
 		
-		JPanel panel_6_7 = new JPanel();
+		ImagePanel panel_6_7 = new ImagePanel();
 		panel_6_7.setBackground(new Color(0, 102, 51));
 		panel_6_7.setBounds(61, 151, 46, 69);
 		contentPane.add(panel_6_7);
 		
-		JPanel panel_6_8 = new JPanel();
+		ImagePanel panel_6_8 = new ImagePanel();
 		panel_6_8.setBackground(new Color(0, 102, 51));
 		panel_6_8.setBounds(117, 151, 46, 69);
 		contentPane.add(panel_6_8);
 		
-		JPanel panel_6_9 = new JPanel();
+		ImagePanel panel_6_9 = new ImagePanel();
 		panel_6_9.setBackground(new Color(0, 102, 51));
 		panel_6_9.setBounds(173, 151, 46, 69);
 		contentPane.add(panel_6_9);
 		
-		JPanel panel_6_10 = new JPanel();
+		ImagePanel panel_6_10 = new ImagePanel();
 		panel_6_10.setBackground(new Color(0, 102, 51));
 		panel_6_10.setBounds(232, 151, 46, 69);
 		contentPane.add(panel_6_10);
 		
-		JPanel panel_6_11 = new JPanel();
+		ImagePanel panel_6_11 = new ImagePanel();
 		panel_6_11.setBackground(new Color(0, 102, 51));
 		panel_6_11.setBounds(288, 151, 46, 69);
 		contentPane.add(panel_6_11);
 		
-		JPanel panel_6_12 = new JPanel();
+		ImagePanel panel_6_12 = new ImagePanel();
 		panel_6_12.setBackground(new Color(0, 102, 51));
 		panel_6_12.setBounds(344, 151, 46, 69);
 		contentPane.add(panel_6_12);
 		
-		JPanel panel_6_13 = new JPanel();
+		ImagePanel panel_6_13 = new ImagePanel();
 		panel_6_13.setBackground(new Color(0, 102, 51));
 		panel_6_13.setBounds(400, 151, 46, 69);
 		contentPane.add(panel_6_13);
