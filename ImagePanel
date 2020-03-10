@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 public class ImagePanel extends JPanel{
 	Card card;
+	
 
 
 	public ImagePanel() {
@@ -19,12 +20,7 @@ public class ImagePanel extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (card !=null) {
-			try {
-				g.drawImage(card.MyImage(), 0, 0, this);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} // see javadoc for more info on the parameters            
+			g.drawImage(card.getImage(), 0, 0, this);
 		}
 	}
 	
