@@ -108,6 +108,7 @@ public class FinalGame extends JFrame {
 				btnNewButton.setEnabled(false);
 				btnStay.setEnabled(false);
 				gameplay.dealerTurn(deck);
+				gameplay.winStatus();
 			}
 		});
 		btnStay.setBounds(238, 219, 89, 23);
@@ -256,13 +257,13 @@ public class FinalGame extends JFrame {
 
 	//set image panels
 	public void setPanel_6(Card c) {
-		ImagePanel testPanel = new ImagePanel();
-		testPanel.setBounds(61, 35, 46, 69);
-		testPanel.setCard(c);
-		contentPane.add(testPanel);
-		System.out.println(c.toString());
+//		
+
+		
+		//System.out.println(c.toString());
 		if (c != null) {
-			//this.panel_6.setCard(c);
+			this.panel_6.setCard(c);
+			repaint();
 		}
 	}
 
