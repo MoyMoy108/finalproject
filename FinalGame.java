@@ -1,201 +1,330 @@
 package FinalProject;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.print.PrinterException;
+public class Gameplay {
+	//card related variables
+	ArrayList<Card> dealer_hand;
+	ArrayList<Card> player_hand;
+	Card[] dealer_cards;
+	Card[] player_cards;
+	//value variables
+	private int dealerhandvalue = 0;
+	private int playerhandvalue = 0;
+	//money variables
+	public double betamount;
+	private double playermoney;
+	//win conditions variables
+	private String winner;
+	FinalGame finalgame;
+	Deck deck;
+	//ImagePanel img;
 
-public class FinalGame extends JFrame {
-
-	
-	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField txtEnterBetAmount;
-	
-	Deck deck = new Deck();
-	Gameplay gameplay = new Gameplay(deck);
-	static FinalGame frame;
-	JTextField MessageBox = null;
-	JTextField current_bet;
-	public static String s = "";
-	
-
-	/**
-	 * Launch the application.
+	/*
+	 * A gameplay constructor
 	 */
-	public static void main(String[] args) throws Exception {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-		
-					try {
-						FinalGame frame = new FinalGame();
-						frame.setVisible(true);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				
-			}
-		});
+	Gameplay(Deck deck, FinalGame finalgame){
+		this.finalgame = finalgame;
+		this.deck = deck;
+		deck.shuffle();
+		//this.img = img;
+		playermoney =1000;
+		dealer_hand = new ArrayList<>();
+		player_hand = new ArrayList<>();
+		//dealer gets two cards to start according to the rules
+		for(int i = 0; i<2; i++)
+		{	
+			Card c = deck.drawCard();
+			System.out.println(c);
+			dealer_hand.add(c);
+		}
+		//gives the player one card to start with
+//		Card c = deck.drawCard();
+//		//finalgame.setPanel_6(c);
+//		player_hand.add(c);
+		//converts the arraylists into arrays
+		dealer_cards =  dealer_hand.toArray(new Card[0]);
+		player_cards = player_hand.toArray(new Card[0]);
+		//gets the current value of the dealer's hand upon starting
+		for(int i = 0; i<dealer_cards.length; i++)
+		{
+			dealerhandvalue += dealer_cards[i].getValue();
+		}
+		//gets the value of the users hand upon starting
+		for(int i = 0; i< player_cards.length; i++)
+		{
+			playerhandvalue += player_cards[i].getValue();
+		}
+
 	}
 
-	/**
-	 * Create the frame.
+	/*
+	 * Player plays
 	 */
-	public FinalGame() {
-		setTitle("Black Jack");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 525, 347);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 102, 51));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		
-		
-		txtEnterBetAmount = new JTextField();
-		txtEnterBetAmount.setText("Enter Bet amount");
-		txtEnterBetAmount.setColumns(10);
-		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Dealer");
-		lblNewLabel.setBounds(222, 11, 46, 14);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblPlayer = new JLabel("Player");
-		lblPlayer.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPlayer.setBounds(222, 247, 46, 14);
-		contentPane.add(lblPlayer);
-		
-		JButton btnNewButton = new JButton("HIT");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				gameplay.playerHit(deck);
+	public void playerrun(Deck deck) {
+		while(playerCanHit()) {
+			playerHit(deck);
+		}
+	}
+
+	/*
+	 * gets the player's money
+	 */
+	public double getplayermoney() {
+		return playermoney;
+	}
+
+
+	/*
+	 * way of taking a bet and finding out if it is more than
+	 * current assets
+	 */
+	public void bet() {
+		Scanner bet = new Scanner(System.in);
+		int currentbet= bet.nextInt();
+		if( currentbet > playermoney) {
+			//inform user that that doesn't work 
+			//pop up possibly
+			System.out.println("That's money you don't have");
+			String set = "That's money you don't have";
+			finalgame.setS(set);
+			finalgame.addMessage();
+			
+		}
+		betamount = currentbet;
+		playermoney -= betamount; 
+	}
+
+	/*
+	 * check what the amount is for bet
+	 */
+	public double getBet() {
+		return betamount;
+	}
+
+	/*
+	 * function that will get the dealer to hit 
+	 * adds card to dealer's hand
+	 * calculates what their current hand is worth
+	 */
+	public void dealerHit(Deck deck)
+	{
+		dealerhandvalue = 0;
+		Card d = deck.drawCard();
+		dealer_hand.add(d);
+		dealer_cards = dealer_hand.toArray(new Card[0]);
+		for(int i = 0; i< dealer_cards.length; i++)
+		{
+			dealerhandvalue += dealer_cards[i].getValue();
+		}
+	}
+
+	/*
+	 * make sure that the value is under 17 
+	 * before the next hit
+	 */
+	public boolean dealerCanHit()
+	{
+		if(dealerhandvalue<17)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/*
+	 * allows the user to hit
+	 * gives them another card
+	 * calculates how much their hand is worth
+	 */
+	public void playerHit(Deck deck)
+	{
+		if (playerCanHit())
+		{
+			playerhandvalue = 0;
+			Card c = deck.drawCard();
+			System.out.println(c);
+			player_hand.add(c);
+			player_cards = player_hand.toArray(new Card[0]);
+			for(int i = 0; i< player_cards.length; i++)
+			{
+				playerhandvalue += player_cards[i].getValue();
 			}
-		});
-		btnNewButton.setBounds(139, 219, 89, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnStay = new JButton("STAY");
-		btnStay.setBounds(238, 219, 89, 23);
-		contentPane.add(btnStay);
-		
-		JLabel lblNewLabel_1 = new JLabel("Total Assets");
-		lblNewLabel_1.setBounds(419, 247, 80, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		textField = new JTextField();
-		textField.setBounds(413, 272, 86, 20);
-		contentPane.add(textField);
-		textField.setText("hello");
-		textField.setColumns(10);
-		
-		ImagePanel panel_6 = new ImagePanel();
-		panel_6.setBackground(new Color(0, 102, 51));
-		panel_6.setBounds(61, 35, 46, 69);
-		contentPane.add(panel_6);
-		
-		ImagePanel panel_6_1 = new ImagePanel();
-		panel_6_1.setBackground(new Color(0, 102, 51));
-		panel_6_1.setBounds(117, 35, 46, 69);
-		contentPane.add(panel_6_1);
-		
-		ImagePanel panel_6_2 = new ImagePanel();
-		panel_6_2.setBackground(new Color(0, 102, 51));
-		panel_6_2.setBounds(173, 35, 46, 69);
-		contentPane.add(panel_6_2);
-		
-		ImagePanel panel_6_3 = new ImagePanel();
-		panel_6_3.setBackground(new Color(0, 102, 51));
-		panel_6_3.setBounds(232, 36, 46, 69);
-		contentPane.add(panel_6_3);
-		
-		ImagePanel panel_6_4 = new ImagePanel();
-		panel_6_4.setBackground(new Color(0, 102, 51));
-		panel_6_4.setBounds(288, 35, 46, 69);
-		contentPane.add(panel_6_4);
-		
-		ImagePanel panel_6_5 = new ImagePanel();
-		panel_6_5.setBackground(new Color(0, 102, 51));
-		panel_6_5.setBounds(344, 35, 46, 69);
-		contentPane.add(panel_6_5);
-		
-		ImagePanel panel_6_6 = new ImagePanel();
-		panel_6_6.setBackground(new Color(0, 102, 51));
-		panel_6_6.setBounds(400, 35, 46, 69);
-		contentPane.add(panel_6_6);
-		
-		ImagePanel panel_6_7 = new ImagePanel();
-		panel_6_7.setBackground(new Color(0, 102, 51));
-		panel_6_7.setBounds(61, 151, 46, 69);
-		contentPane.add(panel_6_7);
-		
-		ImagePanel panel_6_8 = new ImagePanel();
-		panel_6_8.setBackground(new Color(0, 102, 51));
-		panel_6_8.setBounds(117, 151, 46, 69);
-		contentPane.add(panel_6_8);
-		
-		ImagePanel panel_6_9 = new ImagePanel();
-		panel_6_9.setBackground(new Color(0, 102, 51));
-		panel_6_9.setBounds(173, 151, 46, 69);
-		contentPane.add(panel_6_9);
-		
-		ImagePanel panel_6_10 = new ImagePanel();
-		panel_6_10.setBackground(new Color(0, 102, 51));
-		panel_6_10.setBounds(232, 151, 46, 69);
-		contentPane.add(panel_6_10);
-		
-		ImagePanel panel_6_11 = new ImagePanel();
-		panel_6_11.setBackground(new Color(0, 102, 51));
-		panel_6_11.setBounds(288, 151, 46, 69);
-		contentPane.add(panel_6_11);
-		
-		ImagePanel panel_6_12 = new ImagePanel();
-		panel_6_12.setBackground(new Color(0, 102, 51));
-		panel_6_12.setBounds(344, 151, 46, 69);
-		contentPane.add(panel_6_12);
-		
-		ImagePanel panel_6_13 = new ImagePanel();
-		panel_6_13.setBackground(new Color(0, 102, 51));
-		panel_6_13.setBounds(400, 151, 46, 69);
-		contentPane.add(panel_6_13);
-		
-		
-			MessageBox.setText("Message Box");
-			MessageBox.setHorizontalAlignment(SwingConstants.CENTER);
-			MessageBox.setBounds(117, 272, 273, 20);
-			contentPane.add(MessageBox);
-			MessageBox.setColumns(10);
-	
-		
-		JLabel current_bet_label = new JLabel("Current Bet");
-		current_bet_label.setBounds(10, 247, 89, 14);
-		contentPane.add(current_bet_label);
-		
-		current_bet = new JTextField();
-		current_bet.setBounds(10, 272, 89, 20);
-		contentPane.add(current_bet);
-		current_bet.setColumns(10);
+
+		}
+		else if(checkPlayerBust())
+		{
+			//find a way to tell user that they can no longer play that hand 
+			System.out.println("You have gone over and can no longer hit");
+			String set = "You have gone over and can no longer hit";
+			finalgame.setS(set);
+			finalgame.addMessage();
+		}
+		else if(playerBlackJack())
+		{
+			//find a way to tell user that they can no longer play that hand due to victory
+			System.out.println("You have gotten 21 and can no longer hit");
+			String set = "You have gotten 21 and can no longer hit";
+			finalgame.setS(set);
+			finalgame.addMessage();
+		}
+
+
 	}
-	
-	
-	public void addMessage(){
-		
-		MessageBox.setText(s);
-		
+
+	/*
+	 * checks if player can continue hitting
+	 * if below 21 then they can
+	 */
+	public boolean playerCanHit()
+	{
+		if(playerhandvalue<21)
+		{
+			return true;
+		}
+		return false;
 	}
-	
+
+	/*
+	 * states whether or not the user has decided to stay
+	 */
+	public boolean Stay()
+	{
+		return true;
+	}
+
+	/*
+	 * return true/false based on whether the hand is a bust
+	 * 	by seeing if the value is over 21
+	 */
+	public boolean checkDealerBust( ) 
+	{
+		if(dealerhandvalue>21){
+			return true;
+		}
+		return false;	
+	}
+
+	/*
+	 * checks to see if the player has lost
+	 * by going over 21 
+	 */
+	public boolean checkPlayerBust()
+	{
+		if(playerhandvalue>21){
+			return true;
+		}
+		return false;	
+	}
+
+	/*
+	 * check if the dealer's hand is a blackjack or not
+	 * needs to have 2 cards and a hand value of 21
+	 */
+	public boolean dealerBlackJack()
+	{
+		if(dealer_hand.size()==2 && dealerhandvalue==21)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/*
+	 * checks if the player's hand is a blackjack or not
+	 */
+	public boolean playerBlackJack()
+	{
+		if(player_hand.size()==2 && playerhandvalue==21)
+		{
+			return true;
+		}
+		return false;
+	}	
+
+	/*
+	 * Checks the condition of the game and determines who has won 
+	 * after both can no longer or one of the two has won
+	 */
+	public void winStatus() 
+	{
+		//player has blackjack and dealer doesn't but doesn't bust
+		if(playerBlackJack() &&  dealerhandvalue < 21) 
+		{
+			winner = "player wins";
+			String set = winner;
+			finalgame.setS(set);
+			finalgame.addMessage();
+			playermoney += (2.5 * betamount);
+		}
+		//if both people have blackjacks, these is a draw and the bet gets returned 
+		else if(playerBlackJack() && dealerBlackJack()) 
+		{
+			winner = "Draw";
+			String set = winner;
+			finalgame.setS(set);
+			finalgame.addMessage();
+			playermoney += betamount;
+		}
+		//dealer has blackjack and player doesn't bust but doesn't have blackjack player doesn't gain any money 
+		else if(playerhandvalue < 21 && dealerBlackJack()) 
+		{
+			winner = "dealer wins";
+			String set = winner;
+			finalgame.setS(set);
+			finalgame.addMessage();
+
+		}
+		//amount that is won is equivalent to twice the original amount
+		else if(playerhandvalue <=21 && dealerhandvalue < playerhandvalue)
+		{
+			winner = "player wins";
+			String set = winner;
+			finalgame.setS(set);
+			finalgame.addMessage();
+			playermoney += 2 * betamount;
+		} 
+		
+		//dealer's hand is closer to 21 than the player without going over
+		else if(playerhandvalue <21 && dealerhandvalue <=21 && dealerhandvalue > playerhandvalue)
+		{
+			winner = "dealer wins";
+			String set = winner;
+			finalgame.setS(set);
+			finalgame.addMessage();
+		}
+		
+
+	}
+
+
+
+	public void dealerTurn(Deck deck)
+	{
+		//makes sure that the player hasn't busted first before doing dealer's turn
+		if(!checkPlayerBust()) 
+		{
+			//call a method to draw player wins
+			//call a method to create a pop-up window
+			//update stats(total and card counter)
+			//loops as long as their is no bust 
+			while(dealerCanHit()) 
+			{
+				dealerHit(deck);
+
+			}
+
+		}
+		//if player already busted then victory goes to the dealer right away
+		else if( checkPlayerBust()==true)
+		{
+			//dealer wins automatically
+			System.out.println("Dealer wins");
+			String set = "Dealer Wins";
+			finalgame.setS(set);
+			finalgame.addMessage();
+		}
+
+	}
 }
