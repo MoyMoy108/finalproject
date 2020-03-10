@@ -232,19 +232,12 @@ public class Gameplay {
 	 */
 	public void winStatus() 
 	{
-		//player has blackjack and dealer doesn't
-		if(playerBlackJack() && !dealerBlackJack()) 
+		//player has blackjack and dealer doesn't but doesn't bust
+		if(playerBlackJack() &&  dealerhandvalue < 21) 
 		{
 			playerwins = true;
 			dealerwins = false;
-			playermoney += (3 * betamount) /2;
-		}
-		//dealer has blackjack and player doesn't player doesn't gain any money 
-		else if(!playerBlackJack() && dealerBlackJack()) 
-		{
-			playerwins = false;
-			dealerwins = true;
-
+			playermoney += (2.5 * betamount);
 		}
 		//if both people have blackjacks, these is a draw and the bet gets returned 
 		else if(playerBlackJack() && dealerBlackJack()) 
@@ -253,20 +246,36 @@ public class Gameplay {
 			dealerwins = false;
 			playermoney += betamount;
 		}
+		else if(playerBlackJack() && dealerBlackJack()) 
+		{
+			playerwins = false;
+			dealerwins = false;
+			playermoney += betamount;
+		}
+		//dealer has blackjack and player doesn't bust but doesn't have blackjack player doesn't gain any money 
+		else if(playerhandvalue < 21 && dealerBlackJack()) 
+		{
+			playerwins = false;
+			dealerwins = true;
+
+		}
 		//amount that is won is equivalent to twice the original amount
 		else if(playerhandvalue <=21 && dealerhandvalue < playerhandvalue)
 		{
 			playerwins = true;
 			dealerwins = false;
 			playermoney += 2 * betamount;
-		}
-		//
-		else if(playerhandvalue <=21 && dealerhandvalue > playerhandvalue)
+		} 
+		
+		//dealer's hand is closer to 21 than the player without going over
+		else if(playerhandvalue <21 && dealerhandvalue <=21 && dealerhandvalue > playerhandvalue)
 		{
 			playerwins = false;
 			dealerwins = true;
 		}
+
 	}
+
 
 
 	public void dealerTurn(Deck deck)
