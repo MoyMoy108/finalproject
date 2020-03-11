@@ -16,7 +16,7 @@ public class Gameplay {
 	private int playerhandvalue = 0;
 	//money variables
 	public double betamount;
-	private double playermoney;
+	public double playermoney;
 	//win conditions variables
 	private String winner;
 	FinalGame finalgame;
@@ -24,6 +24,7 @@ public class Gameplay {
 	
 	public int player_card_display_counter = 0;
 	public int dealer_card_display_counter = 0;
+	
 
 	/*
 	 * A game play constructor
@@ -192,8 +193,8 @@ public class Gameplay {
 	 * current assets
 	 */
 	public void bet() {
-		Scanner bet = new Scanner(System.in);
-		int currentbet= bet.nextInt();
+		
+		double currentbet= finalgame.bet;
 		if( currentbet > playermoney) {
 			//inform user that that doesn't work 
 			//pop up possibly
@@ -205,6 +206,7 @@ public class Gameplay {
 		}
 		betamount = currentbet;
 		playermoney -= betamount; 
+		System.out.print("Total assets = " + playermoney);
 	}
 
 	
@@ -442,5 +444,6 @@ public class Gameplay {
 		}
 	}
 }
+
 
 
