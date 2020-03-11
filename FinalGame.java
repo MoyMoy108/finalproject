@@ -24,12 +24,10 @@ import java.awt.Dimension;
 
 public class FinalGame extends JFrame {
 
-
-	protected static final AbstractButton RestartButton = null;
-	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField txtEnterBetAmount;
-	private int playing = 0;
+	public JPanel contentPane;
+	public JTextField textField;
+	public JTextField txtEnterBetAmount;
+	public int playing = 0;
 	Deck deck = new Deck();
 	Gameplay gameplay;
 	static FinalGame frame;
@@ -70,11 +68,15 @@ public class FinalGame extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) throws Exception {
+		run();
+	}
+	
+	public static void run() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 
 				try {
-					FinalGame frame = new FinalGame();
+					frame = new FinalGame();
 					frame.setVisible(true);
 					//playgame();
 				} catch (Exception e) {
@@ -385,7 +387,7 @@ public class FinalGame extends JFrame {
 	public void makePopup() {
 		//popup menu
 				JFrame popupMenu = new JFrame();
-					popupMenu.setBounds(100, 100, 250, 150);
+				popupMenu.setBounds(100, 100, 250, 250);
 				
 				//addPopup(contentPane, popupMenu);
 				
@@ -408,30 +410,49 @@ public class FinalGame extends JFrame {
 				
 				
 				JButton PlayAgainButton = new JButton("Play Again");
+				PlayAgainButton.setBounds(100, 50, 60, 40);
 				PlayAgainButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
+						FinalGame playagain = new FinalGame();
+						playagain.run();
+						playagain.gameplay.playermoney = b;
+						frame.setVisible(false);
+						setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 					}
 				});
-				PlayAgainButton.setBounds(100, 50, 60, 40);
 				popupMenu.add(PlayAgainButton);
 				
 				JButton CloseButton = new JButton("Close App");
 				CloseButton.setBounds(180, 50, 60, 40);
-				RestartButton.addActionListener(new ActionListener() {
+				CloseButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						JFrame bye = new JFrame();
-						bye.setBounds(300, 300, 75, 50);
+						bye.setBounds(300, 300, 200, 50);
 						JLabel bye_message = new JLabel();
 						bye_message.setText("Hope you had a good time!!!");
 						bye.add(bye_message);
+						setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+						try {
+							frame.setVisible(false);
+							popupMenu.setVisible(false);
+							//playgame();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						bye.setVisible(true);
+						setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 					}
 				});
-				
 				popupMenu.add(CloseButton);
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 							
 				popupMenu.setVisible(true);
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	
