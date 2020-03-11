@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,17 +20,19 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.print.PrinterException;
 import java.awt.Font;
+import java.awt.Dimension;
 
 public class FinalGame extends JFrame {
 
 
+	protected static final AbstractButton RestartButton = null;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField txtEnterBetAmount;
 	private int playing = 0;
 	Deck deck = new Deck();
 	Gameplay gameplay;
-	FinalGame frame;
+	static FinalGame frame;
 	JTextField MessageBox = new JTextField();
 	JTextField current_bet;
 	public String s = " ";
@@ -37,6 +40,14 @@ public class FinalGame extends JFrame {
 	JButton StayButton;
 	
 	public int counter = 0;
+	public Integer bet=0;
+	public Double b = 0.0;
+	public String update = " ";
+	
+	public boolean enter_press = false;
+	public boolean winner_exists = false;
+	
+	static NewStartScreen newgame = new NewStartScreen();
 
 	//img panels
 	public ImagePanel panel1 = new ImagePanel();
@@ -112,12 +123,6 @@ public class FinalGame extends JFrame {
 		lblNewLabel_1.setBounds(585, 422, 80, 14);
 		contentPane.add(lblNewLabel_1);
 
-		textField = new JTextField();
-		textField.setBounds(579, 447, 86, 20);
-		contentPane.add(textField);
-		textField.setText("hello");
-		textField.setColumns(10);
-
 		MessageBox.setText("Message Box");
 		MessageBox.setHorizontalAlignment(SwingConstants.CENTER);
 		MessageBox.setBounds(109, 447, 460, 20);
@@ -129,11 +134,39 @@ public class FinalGame extends JFrame {
 		contentPane.add(current_bet_label);
 
 		current_bet = new JTextField();
+		current_bet.setText("Enter Bet");
 		current_bet.setBounds(10, 447, 89, 20);
+		current_bet.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String a = current_bet.getText();
+					current_bet.setText(a);
+					bet = Integer.valueOf(a);
+					System.out.println(bet);
+					gameplay.bet();
+					b = gameplay.getplayermoney();
+					enter_press= true;
+					if (enter_press==true) {
+						update = b.toString();
+						textField.setText(update);
+						}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
 		contentPane.add(current_bet);
 		current_bet.setColumns(10);	
 
-
+		textField = new JTextField();
+		textField.setBounds(579, 447, 86, 20);
+		contentPane.add(textField);
+		textField.setText("1000");
+		textField.setColumns(10);
+		
+		
 		/*
 		 * Action buttons
 		 */
@@ -161,6 +194,8 @@ public class FinalGame extends JFrame {
 				StayButton.setEnabled(false);
 				gameplay.dealerTurn(deck);
 				gameplay.winStatus();
+				makePopup();
+				
 			}
 		});
 		StayButton.setBounds(323, 388, 109, 33);
@@ -225,12 +260,10 @@ public class FinalGame extends JFrame {
 
 		panel14.setBackground(new Color(0, 102, 51));
 		panel14.setBounds(532, 272, 71, 105);
-		contentPane.add(panel14);
-
-
+		contentPane.add(panel14);		
+		
 		gameplay = new Gameplay(deck, this);
 	}
-
 
 	/*
 	 * the instructions on which methods to call for dealer and player to play and check for winner
@@ -343,5 +376,65 @@ public class FinalGame extends JFrame {
 		panel14.setCard(c);
 		repaint();
 	}
+	
+	
+	/*
+	 * popup menu
+	 */
+	
+	public void makePopup() {
+		//popup menu
+				JFrame popupMenu = new JFrame();
+					popupMenu.setBounds(100, 100, 250, 150);
+				
+				//addPopup(contentPane, popupMenu);
+				
+				JLabel lblNewLabel_2 = new JLabel("Well played");
+				lblNewLabel_2.setBounds(80, 20, 100, 40);
+				lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
+				popupMenu.add(lblNewLabel_2);
+				
+				JButton RestartButton = new JButton("Restart");
+				RestartButton.setBounds(40, 50, 60, 40);
+				RestartButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						frame.dispose();
+						frame.setVisible(false);
+						newgame.main(null);
+					}
+				});
 
+				popupMenu.add(RestartButton);
+				
+				
+				JButton PlayAgainButton = new JButton("Play Again");
+				PlayAgainButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+					}
+				});
+				PlayAgainButton.setBounds(100, 50, 60, 40);
+				popupMenu.add(PlayAgainButton);
+				
+				JButton CloseButton = new JButton("Close App");
+				CloseButton.setBounds(180, 50, 60, 40);
+				RestartButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						JFrame bye = new JFrame();
+						bye.setBounds(300, 300, 75, 50);
+						JLabel bye_message = new JLabel();
+						bye_message.setText("Hope you had a good time!!!");
+						bye.add(bye_message);
+						bye.setVisible(true);
+					}
+				});
+				
+				popupMenu.add(CloseButton);
+							
+				popupMenu.setVisible(true);
+	}
+
+	
+	
+	
 }
