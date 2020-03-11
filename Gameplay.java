@@ -1,5 +1,6 @@
 package FinalProject;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,6 +25,8 @@ public class Gameplay {
 	
 	public int player_card_display_counter = 0;
 	public int dealer_card_display_counter = 0;
+	
+	public Rectangle rect = new Rectangle(36, 36, 71, 105);
 	
 
 	/*
@@ -205,7 +208,9 @@ public class Gameplay {
 
 		}
 		betamount = currentbet;
+		if (playermoney >= betamount) {
 		playermoney -= betamount; 
+		}
 		System.out.print("Total assets = " + playermoney);
 	}
 
@@ -357,6 +362,15 @@ public class Gameplay {
 			finalgame.addMessage();
 			playermoney += betamount;
 		}
+		else if(playerhandvalue == dealerhandvalue) 
+		{
+			winner = "Draw";
+			String set = winner;
+			finalgame.setS(set);
+			finalgame.addMessage();
+			playermoney += betamount;
+		}
+		
 		
 		//dealer has blackjack and player doesn't bust but doesn't have blackjack player doesn't gain any money 
 		else if(playerhandvalue < 21 && dealerBlackJack()) 
@@ -444,6 +458,3 @@ public class Gameplay {
 		}
 	}
 }
-
-
-
