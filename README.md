@@ -1,2 +1,2 @@
 # Black Jack
-The blackjack game that we are making for the final project
+A black jack game using Java
